@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)https://www.genspark.ai/api/files/s/3mZVREli -->
+<html lang="pt-BR" data-theme="light"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método DigitalDM - Home Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./Método DigitalDM - Home Page_files/css2" rel="stylesheet">
+    <link rel="stylesheet" href="./Método DigitalDM - Home Page_files/pico.min.css">
+    <style>
+      :root {
+        --primary: #6366f1;
+        --secondary: #8b5cf6;
+        --accent: #ec4899;
+        --phase2: #f59e0b;
+        --phase3: #10b981;
+        --bg-body: #f8fafc;
+        --surface: #ffffff;
+        --text-main: #0f172a;
+        --text-muted: #64748b;
+        --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        --gradient-accent: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px -1px rgba(99, 102, 241, 0.1), 0 2px 4px -1px rgba(99, 102, 241, 0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(99, 102, 241, 0.1), 0 4px 6px -2px rgba(99, 102, 241, 0.05);
+        --radius-lg: 16px;
+        --radius-xl: 24px;
+      }
+
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: var(--bg-body);
+        color: var(--text-main);
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        line-height: 1.6;
+      }
+
+      /* Typography */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        color: var(--text-main);
+        font-weight: 700;
+        letter-spacing: -0.025em;
+      }
+
+      .gradient-text {
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* Utilities */
+      .card {
+        background: var(--surface);
+        border-radius: var(--radius-lg);
+        padding: 2rem;
+        box-shadow: var(--shadow-md);
+        border: 1px solid rgba(226, 232, 240, 0.6);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        margin-bottom: 2rem;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+
+      /* Hero Header */
+      .hero {
+        text-align: center;
+        padding: 5rem 2rem;
+        margin-bottom: 3rem;
+        background: white;
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-lg);
+        position: relative;
+        overflow: hidden;
+        border-bottom: 6px solid var(--secondary);
+      }
+
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: var(--gradient-primary);
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 0.5rem;
+        line-height: 1.1;
+      }
+
+      .hero p.tagline {
+        font-size: 1.5rem;
+        color: var(--text-muted);
+        margin-bottom: 1rem;
+        font-weight: 500;
+      }
+
+      .hero-slogan {
+        background: linear-gradient(to right, #eef2ff, #f5f3ff);
+        padding: 0.8rem 1.5rem;
+        border-radius: 50px;
+        display: inline-block;
+        font-weight: 600;
+        color: var(--primary);
+        font-size: 0.9rem;
+        margin-bottom: 3rem;
+        border: 1px solid #e0e7ff;
+      }
+
+      .stats-grid {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+      }
+
+      .stat-item {
+        text-align: center;
+      }
+
+      .stat-number {
+        display: block;
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--text-main);
+      }
+
+      .stat-label {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      /* Welcome Section */
+      .welcome-card {
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        border-left: 6px solid var(--primary);
+      }
+
+      .quote-highlight {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-top: 1.5rem;
+        font-style: italic;
+      }
+
+      /* Usage Steps */
+      .usage-card {
+        text-align: center;
+        padding: 2rem;
+      }
+      .usage-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        display: block;
+      }
+
+      /* Phase Cards */
+      .phase-card {
+        padding: 2rem;
+        border-radius: var(--radius-lg);
+        background: white;
+        box-shadow: var(--shadow-md);
+        transition: transform 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #e2e8f0;
+        height: 100%;
+      }
+      .phase-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .phase-blue {
+        border-top: 6px solid var(--primary);
+      }
+      .phase-orange {
+        border-top: 6px solid var(--phase2);
+      }
+      .phase-green {
+        border-top: 6px solid var(--phase3);
+      }
+
+      .phase-badge {
+        font-size: 0.8rem;
+        font-weight: 700;
+        padding: 0.3rem 0.8rem;
+        border-radius: 50px;
+        display: inline-block;
+        margin-bottom: 1rem;
+      }
+      .badge-blue {
+        background: #e0e7ff;
+        color: var(--primary);
+      }
+      .badge-orange {
+        background: #ffedd5;
+        color: var(--phase2);
+      }
+      .badge-green {
+        background: #d1fae5;
+        color: var(--phase3);
+      }
+
+      .phase-icon {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .phase-content ul {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        padding-left: 1.2rem;
+      }
+
+      .btn-phase {
+        margin-top: auto;
+        display: block;
+        text-align: center;
+        padding: 0.8rem;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: opacity 0.2s;
+      }
+      .btn-blue {
+        background: var(--primary);
+        color: white;
+      }
+      .btn-orange {
+        background: var(--phase2);
+        color: white;
+      }
+      .btn-green {
+        background: var(--phase3);
+        color: white;
+      }
+      .btn-phase:hover {
+        opacity: 0.9;
+      }
+
+      /* Quick Access */
+      .quick-card {
+        display: flex;
+        align-items: center;
+        padding: 1.5rem;
+        gap: 1rem;
+      }
+      .quick-icon {
+        font-size: 2rem;
+      }
+
+      /* Timeline */
+      .timeline-container {
+        display: flex;
+        justify-content: space-between;
+        margin: 3rem 0;
+        position: relative;
+        padding: 0 1rem;
+      }
+      .timeline-container::before {
+        content: '';
+        position: absolute;
+        top: 20px;
+        left: 2rem;
+        right: 2rem;
+        height: 4px;
+        background: #e2e8f0;
+        z-index: 0;
+      }
+      .timeline-item {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        width: 100%;
+      }
+      .timeline-dot {
+        width: 40px;
+        height: 40px;
+        background: white;
+        border: 4px solid var(--primary);
+        border-radius: 50%;
+        margin: 0 auto 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: var(--primary);
+      }
+      .timeline-content {
+        background: white;
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid #e2e8f0;
+        font-size: 0.85rem;
+      }
+
+      /* Methodology */
+      .method-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+      }
+      .method-item {
+        background: #f8fafc;
+        padding: 1rem 1.5rem;
+        border-radius: 50px;
+        border: 1px solid #e2e8f0;
+        font-weight: 600;
+        color: var(--text-muted);
+      }
+      .method-item span {
+        color: var(--primary);
+        margin-right: 0.5rem;
+      }
+
+      /* FAQ Accordion */
+      details {
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        margin-bottom: 0.5rem;
+        padding: 0.5rem 1rem;
+      }
+      summary {
+        font-weight: 600;
+        cursor: pointer;
+        color: var(--text-main);
+      }
+
+      /* Footer */
+      .footer-cta {
+        background: white;
+        text-align: center;
+        padding: 4rem 2rem;
+        border-radius: var(--radius-xl);
+        margin-top: 4rem;
+        box-shadow: var(--shadow-lg);
+        position: relative;
+        overflow: hidden;
+      }
+      .footer-cta::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: var(--gradient-accent);
+      }
+
+      .btn-start {
+        background: var(--gradient-primary);
+        color: white;
+        font-size: 1.2rem;
+        padding: 1rem 3rem;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 700;
+        display: inline-block;
+        margin-top: 2rem;
+        box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        border: none;
+      }
+
+      /* Manager Card */
+      .manager-card {
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        color: #1e3a8a;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+        .timeline-container {
+          flex-direction: column;
+          gap: 2rem;
+        }
+        .timeline-container::before {
+          width: 4px;
+          height: 100%;
+          left: 20px;
+          top: 0;
+        }
+        .timeline-item {
+          display: flex;
+          text-align: left;
+          gap: 1rem;
+        }
+        .timeline-dot {
+          margin: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HERO HEADER -->
+    <header class="hero">
+      <h1>MÉTODO <span class="gradient-text">DIGITALDM</span></h1>
+      <p class="tagline">Transformando Instagram em Máquina de Vendas para Moda</p>
+      <div class="hero-slogan">Realizando sonhos desde 2010</div>
+
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-number">+100 Mi</span>
+          <span class="stat-label">Faturados</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">+1.200</span>
+          <span class="stat-label">E-commerces</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">+10 Mi</span>
+          <span class="stat-label">Em Tráfego</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">15 Anos</span>
+          <span class="stat-label">Experiência</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- WELCOME -->
+    <section class="card welcome-card">
+      <div class="grid-2" style="align-items: center">
+        <div>
+          <h2>Seja muito bem-vindo(a)! 👋</h2>
+          <p>
+            Você acaba de dar o passo mais importante para transformar seu Instagram em uma verdadeira
+            <strong>máquina de vendas</strong>.
+          </p>
+          <p>
+            Este é um sistema completo, testado e aprovado por mais de 1.200 lojistas que já faturaram mais de 100
+            milhões usando nossas estratégias.
+          </p>
+          <div class="quote-highlight">"Não tenha medo de falhar, tenha medo de não tentar!"</div>
+        </div>
+        <div style="text-align: center">
+          <div style="font-size: 5rem">🚀</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW TO USE -->
+    <section class="grid-3" style="margin-bottom: 3rem">
+      <div class="card usage-card">
+        <span class="usage-icon">📚</span>
+        <h4>Navegue</h4>
+        <p class="text-muted">Use o menu lateral para acessar cada seção. Tudo está organizado de forma intuitiva.</p>
+      </div>
+      <div class="card usage-card">
+        <span class="usage-icon">✅</span>
+        <h4>Marque</h4>
+        <p class="text-muted">
+          Use os checkboxes para acompanhar o que já foi feito. Seu avanço fica salvo automaticamente.
+        </p>
+      </div>
+      <div class="card usage-card">
+        <span class="usage-icon">✏️</span>
+        <h4>Personalize</h4>
+        <p class="text-muted">Faça anotações, adicione suas próprias ideias e adapte o método à sua realidade.</p>
+      </div>
+    </section>
+
+    <!-- MAIN PHASES -->
+    <h2 style="text-align: center; margin-bottom: 2rem">As 3 Fases do Método</h2>
+    <section class="grid-3">
+      <!-- FASE 1 -->
+      <article class="phase-card phase-blue">
+        <div class="phase-badge badge-blue">0-30 DIAS</div>
+        <div class="phase-icon">🎯</div>
+        <h3>Fundamento e Organização</h3>
+        <p style="font-size: 0.9rem">Pare de "postar no automático" e dê lógica ao perfil.</p>
+        <div class="phase-content">
+          <ul>
+            <li>Clareza de posicionamento</li>
+            <li>Padrão de conteúdo</li>
+            <li>Estrutura de vídeos</li>
+          </ul>
+        </div>
+        <a href="https://www.genspark.ai/api/files/s/3mZVREli#" class="btn-phase btn-blue">Começar Fase 1 →</a>
+      </article>
+
+      <!-- FASE 2 -->
+      <article class="phase-card phase-orange">
+        <div class="phase-badge badge-orange">30-60 DIAS</div>
+        <div class="phase-icon">💬</div>
+        <h3>Engajamento e Desejo</h3>
+        <p style="font-size: 0.9rem">Transforme visualizações em interação real.</p>
+        <div class="phase-content">
+          <ul>
+            <li>Foco no benefício</li>
+            <li>Stories conversados</li>
+            <li>Prova social obrigatória</li>
+          </ul>
+        </div>
+        <a href="https://www.genspark.ai/api/files/s/3mZVREli#" class="btn-phase btn-orange">Ir para Fase 2 →</a>
+      </article>
+
+      <!-- FASE 3 -->
+      <article class="phase-card phase-green">
+        <div class="phase-badge badge-green">60-90 DIAS +</div>
+        <div class="phase-icon">💰</div>
+        <h3>Conversão e Venda</h3>
+        <p style="font-size: 0.9rem">Transforme atenção em faturamento consistente.</p>
+        <div class="phase-content">
+          <ul>
+            <li>Intenção de venda</li>
+            <li>CTA claro e direto</li>
+            <li>Ajustes com dados</li>
+          </ul>
+        </div>
+        <a href="https://www.genspark.ai/api/files/s/3mZVREli#" class="btn-phase btn-green">Acessar Fase 3 →</a>
+      </article>
+    </section>
+
+    <!-- TIMELINE -->
+    <section style="margin: 4rem 0">
+      <h3 style="text-align: center">Linha do Tempo do Sucesso</h3>
+      <div class="timeline-container">
+        <div class="timeline-item">
+          <div class="timeline-dot">1</div>
+          <div class="timeline-content">
+            <strong>HOJE</strong><br>Acesso completo ao método e workspace organizado.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">2</div>
+          <div class="timeline-content">
+            <strong>30 DIAS</strong><br>Perfil organizado, conteúdo padrão e entrega melhorando.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">3</div>
+          <div class="timeline-content">
+            <strong>60 DIAS</strong><br>Engajamento crescendo, comentários e DMs aumentando.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">🎉</div>
+          <div class="timeline-content">
+            <strong>90 DIAS</strong><br>Vendas consistentes e previsibilidade no faturamento.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK ACCESS -->
+    <h3 style="margin-bottom: 1.5rem">Acesso Rápido</h3>
+    <div class="grid-3" style="margin-bottom: 3rem">
+      <div class="card quick-card">
+        <span class="quick-icon">🛠️</span>
+        <div>
+          <strong>Ferramentas</strong>
+          <div style="font-size: 0.8rem; color: var(--text-muted)">CapCut, Canva, etc</div>
+        </div>
+      </div>
+      <div class="card quick-card">
+        <span class="quick-icon">📅</span>
+        <div>
+          <strong>Calendário</strong>
+          <div style="font-size: 0.8rem; color: var(--text-muted)">Planeje o ano todo</div>
+        </div>
+      </div>
+      <div class="card quick-card">
+        <span class="quick-icon">📊</span>
+        <div>
+          <strong>Métricas</strong>
+          <div style="font-size: 0.8rem; color: var(--text-muted)">Acompanhe progresso</div>
+        </div>
+      </div>
+      <div class="card quick-card">
+        <span class="quick-icon">🗺️</span>
+        <div>
+          <strong>Mapa Mental</strong>
+          <div style="font-size: 0.8rem; color: var(--text-muted)">Visão geral</div>
+        </div>
+      </div>
+      <div class="card quick-card">
+        <span class="quick-icon">💡</span>
+        <div>
+          <strong>Legendas</strong>
+          <div style="font-size: 0.8rem; color: var(--text-muted)">Copie e cole</div>
+        </div>
+      </div>
+      <div class="card quick-card">
+        <span class="quick-icon">🎬</span>
+        <div>
+          <strong>Tutoriais</strong>
+          <div style="font-size: 0.8rem; color: var(--text-muted)">Aprenda na prática</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- METHODOLOGY -->
+    <section class="card" style="text-align: center">
+      <h3 style="margin-bottom: 1.5rem">Nossa Metodologia</h3>
+      <div class="method-grid">
+        <div class="method-item"><span>1.</span> Diagnóstico</div>
+        <div class="method-item"><span>2.</span> Estratégia</div>
+        <div class="method-item"><span>3.</span> Otimização</div>
+        <div class="method-item"><span>4.</span> Conversão</div>
+        <div class="method-item"><span>5.</span> Retenção</div>
+      </div>
+    </section>
+
+    <div class="grid-2" style="margin-top: 2rem">
+      <!-- MANAGER INFO -->
+      <div class="card manager-card">
+        <h3>👨‍💼 Seu Gestor Responsável</h3>
+        <p>Estamos aqui para te ajudar em cada etapa!</p>
+        <p><strong>Nome:</strong> [NOME DO GESTOR]</p>
+        <p><strong>WhatsApp:</strong> [NÚMERO]</p>
+        <p><strong>E-mail:</strong> [EMAIL]</p>
+        <hr style="border-color: #bfdbfe">
+        <p style="font-size: 0.9rem"><strong>📅 Próximo passo:</strong> Agendar call de onboarding (30min)</p>
+      </div>
+
+      <!-- DIFFERENTIALS -->
+      <div class="card">
+        <h3>Por que funciona?</h3>
+        <ul style="list-style: none; padding: 0">
+          <li style="margin-bottom: 0.8rem">✅ <strong>Testado:</strong> +1.200 lojistas aplicaram</li>
+          <li style="margin-bottom: 0.8rem">✅ <strong>Prático:</strong> Sem enrolação, só o que vende</li>
+          <li style="margin-bottom: 0.8rem">✅ <strong>Adaptável:</strong> Para iniciantes ou experientes</li>
+          <li style="margin-bottom: 0">✅ <strong>Suporte Real:</strong> Equipe DigitalDM com você</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <section style="margin-top: 3rem">
+      <h3>Dúvidas Frequentes</h3>
+      <details>
+        <summary>❓ Como uso o Notion?</summary>
+        <p>
+          O Notion funciona como um caderno digital. Clique nas páginas do menu lateral para navegar. Use checkboxes
+          para marcar o que já fez.
+        </p>
+      </details>
+      <details>
+        <summary>❓ Posso editar o conteúdo?</summary>
+        <p>Sim! Este workspace é seu. Faça anotações, adicione ideias e personalize conforme sua necessidade.</p>
+      </details>
+      <details>
+        <summary>❓ Como marco meu progresso?</summary>
+        <p>Cada fase tem checklists. Basta clicar nos quadradinhos para marcar como concluído.</p>
+      </details>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer-cta">
+      <h2 class="gradient-text">🚀 PRONTO PARA COMEÇAR?</h2>
+      <p style="font-size: 1.2rem; margin-bottom: 1rem">Seu primeiro passo é simples.</p>
+      <p style="color: var(--text-muted)">Clique em 'Fase 1 - Fundamento e Organização' e comece agora!</p>
+
+      <a href="https://www.genspark.ai/api/files/s/3mZVREli#" class="btn-start">COMEÇAR AGORA →</a>
+
+      <div style="margin-top: 3rem; border-top: 1px solid #e2e8f0; padding-top: 2rem">
+        <p style="font-weight: 700; color: var(--primary)">DigitalDM</p>
+        <p style="font-style: italic">"Não tenha medo de falhar, tenha medo de não tentar!"</p>
+        <p style="font-size: 0.8rem; color: var(--text-muted)">Realizando sonhos desde 2010 💜</p>
+      </div>
+    </footer>
+  <script defer="" src="./Método DigitalDM - Home Page_files/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;rayId&quot;:&quot;9afb76149e702569&quot;,&quot;serverTiming&quot;:{&quot;name&quot;:{&quot;cfExtPri&quot;:true,&quot;cfEdge&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfL4&quot;:true,&quot;cfSpeedBrain&quot;:true,&quot;cfCacheStatus&quot;:true}},&quot;version&quot;:&quot;2025.9.1&quot;,&quot;token&quot;:&quot;4edd5f8ec12a48cfa682ab8261b80a79&quot;}" crossorigin="anonymous"></script>
+
+
+</body></html>
