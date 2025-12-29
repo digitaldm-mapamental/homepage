@@ -1,0 +1,862 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DigitalDM — Checklist Qualificação (Score + Export)</title>
+  <style>
+    :root{
+      --bg:#0b1220; --card:#0f1a2e; --muted:#93a4c7; --text:#eaf0ff;
+      --line:rgba(255,255,255,.08); --ok:#16a34a; --warn:#f59e0b; --bad:#ef4444; --info:#60a5fa;
+      --chip:#142449; --btn:#1f2f52;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,var(--bg),#070b14);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 16px 48px}
+    h1{font-size:20px;margin:0 0 6px}
+    .sub{color:var(--muted);margin:0 0 18px;font-size:13px}
+    .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}
+    @media (max-width: 980px){.grid{grid-template-columns:1fr}}
+    .card{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:14px;padding:16px}
+    .card h2{margin:0 0 12px;font-size:14px;color:#cfe0ff}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media (max-width: 700px){.row{grid-template-columns:1fr}}
+    label{display:block;font-size:12px;color:#cfe0ff;margin:10px 0 6px}
+    input, select, textarea{
+      width:100%; background:rgba(0,0,0,.25); border:1px solid var(--line); color:var(--text);
+      border-radius:10px; padding:10px; outline:none;
+    }
+    textarea{min-height:92px;resize:vertical}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .chip{background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:12px;color:#cfe0ff}
+    .radio{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+    .radio label{margin:0;color:var(--muted);font-size:12px;display:flex;gap:8px;align-items:center}
+    .radio input{width:auto}
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    button{
+      background:var(--btn); color:var(--text); border:1px solid var(--line); border-radius:10px;
+      padding:10px 12px; cursor:pointer; font-weight:600; font-size:13px;
+    }
+    button:hover{filter:brightness(1.08)}
+    .primary{background:#233a6a}
+    .ok{background:rgba(22,163,74,.18);border-color:rgba(22,163,74,.35)}
+    .warn{background:rgba(245,158,11,.16);border-color:rgba(245,158,11,.35)}
+    .bad{background:rgba(239,68,68,.16);border-color:rgba(239,68,68,.35)}
+    .info{background:rgba(96,165,250,.14);border-color:rgba(96,165,250,.35)}
+    .kpi{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .kpi .box{flex:1;min-width:170px;background:rgba(0,0,0,.18);border:1px solid var(--line);border-radius:12px;padding:12px}
+    .kpi .t{font-size:11px;color:var(--muted)}
+    .kpi .v{font-size:18px;font-weight:800;margin-top:4px}
+    .badge{display:inline-block;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:800}
+    .b-ok{background:rgba(22,163,74,.22);border:1px solid rgba(22,163,74,.35);color:#b7ffcf}
+    .b-warn{background:rgba(245,158,11,.18);border:1px solid rgba(245,158,11,.35);color:#ffe0a3}
+    .b-bad{background:rgba(239,68,68,.18);border:1px solid rgba(239,68,68,.35);color:#ffc2c2}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    .hint{color:var(--muted);font-size:12px;margin-top:8px;line-height:1.35}
+    .hide{display:none}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>DigitalDM — Qualificação de Lead (Checklist + Score + Export)</h1>
+    <p class="sub">Preencha → clique <b>Calcular</b> → copie ou exporte o resumo. (Roda local, sem internet.)</p>
+
+    <div class="grid">
+      <!-- ESQUERDA: FORM -->
+      <div class="card">
+        <h2>1) Dados do lead</h2>
+
+        <div class="row">
+          <div>
+            <label>Nome do lead</label>
+            <input id="lead_nome" placeholder="Ex.: Ana Paula" />
+          </div>
+          <div>
+            <label>Empresa / Negócio</label>
+            <input id="lead_empresa" placeholder="Ex.: Clínica X / Loja Y" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label>Nicho</label>
+            <select id="nicho">
+              <option value="">Selecione…</option>
+              <option value="clinicas">Clínicas (saúde/estética/odonto)</option>
+              <option value="moda">Moda (loja física / e-commerce)</option>
+              <option value="local">Negócios locais (geral)</option>
+            </select>
+          </div>
+          <div>
+            <label>Cidade/UF</label>
+            <input id="lead_cidade" placeholder="Ex.: Curitiba/PR" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label>WhatsApp</label>
+            <input id="lead_whats" placeholder="(DDD) 9xxxx-xxxx" />
+          </div>
+          <div>
+            <label>Instagram / Site</label>
+            <input id="lead_insta" placeholder="@perfil / site" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label>Você decide sozinho(a)?</label>
+            <select id="autoridade">
+              <option value="">Selecione…</option>
+              <option value="sim">Sim (decisor)</option>
+              <option value="junto">Decido junto com alguém</option>
+              <option value="nao">Não (precisa aprovar com alguém)</option>
+            </select>
+          </div>
+          <div>
+            <label>Prioridade</label>
+            <select id="timing">
+              <option value="">Selecione…</option>
+              <option value="agora">Agora (próximos 7–14 dias)</option>
+              <option value="30">Em até 30 dias</option>
+              <option value="depois">Depois / só pesquisando</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="chips">
+          <div class="chip">⚙️ Método: Aquisição → Conversão → Operação → LTV</div>
+          <div class="chip">📌 Score automático 0–100</div>
+          <div class="chip">📤 Export TXT/JSON/CSV</div>
+        </div>
+
+        <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
+
+        <h2>2) Diagnóstico (núcleo)</h2>
+
+        <label>Objetivo principal</label>
+        <select id="objetivo">
+          <option value="">Selecione…</option>
+          <option value="leads">Mais leads (volume)</option>
+          <option value="conversao">Mais agendamentos/vendas (conversão)</option>
+          <option value="previsibilidade">Previsibilidade (processo + KPI)</option>
+          <option value="retencao">Retenção/LTV (recorrência/reativação)</option>
+        </select>
+
+        <label>Como chegam clientes hoje? (marque o principal)</label>
+        <select id="canal">
+          <option value="">Selecione…</option>
+          <option value="organico">Orgânico (Instagram/indicação)</option>
+          <option value="meta">Meta Ads</option>
+          <option value="google">Google (Ads/Maps)</option>
+          <option value="misto">Misto</option>
+          <option value="nao_sei">Não sei / irregular</option>
+        </select>
+
+        <div class="row">
+          <div>
+            <label>Tempo médio de resposta no WhatsApp</label>
+            <select id="resposta">
+              <option value="">Selecione…</option>
+              <option value="0-5">0–5 min</option>
+              <option value="5-30">5–30 min</option>
+              <option value="30-120">30–120 min</option>
+              <option value="2-24">2–24h</option>
+              <option value="24+">24h+</option>
+            </select>
+          </div>
+          <div>
+            <label>Processo/CRM hoje</label>
+            <select id="crm">
+              <option value="">Selecione…</option>
+              <option value="crm">Tem CRM + pipeline</option>
+              <option value="planilha">Planilha/controle simples</option>
+              <option value="whats">Só WhatsApp (sem processo)</option>
+              <option value="nenhum">Nenhum / bagunçado</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label>Leads últimos 30 dias (aprox.)</label>
+            <input id="leads30" type="number" min="0" placeholder="Ex.: 120" />
+          </div>
+          <div>
+            <label>Vendas/Agendamentos últimos 30 dias (aprox.)</label>
+            <input id="conv30" type="number" min="0" placeholder="Ex.: 25" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label>Ticket médio (R$)</label>
+            <input id="ticket" type="number" min="0" placeholder="Ex.: 350" />
+          </div>
+          <div>
+            <label>Verba mensal de mídia (R$) — (mídia à parte)</label>
+            <input id="midia" type="number" min="0" placeholder="Ex.: 1500" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label>Capacidade de atendimento (estrutura)</label>
+            <select id="estrutura">
+              <option value="">Selecione…</option>
+              <option value="boa">Boa (time/agenda organizada)</option>
+              <option value="media">Média (dá conta, mas oscila)</option>
+              <option value="fraca">Fraca (demora, perde lead)</option>
+            </select>
+          </div>
+          <div>
+            <label>Compromisso com processo (rotina + KPIs)</label>
+            <select id="compromisso">
+              <option value="">Selecione…</option>
+              <option value="alto">Alto (topa rotina e execução)</option>
+              <option value="medio">Médio (topa, mas precisa direcionamento)</option>
+              <option value="baixo">Baixo (quer “só anúncio”)</option>
+            </select>
+          </div>
+        </div>
+
+        <label>Dor principal (em 1 frase)</label>
+        <input id="dor" placeholder="Ex.: ‘Até entra lead, mas ninguém converte e o WhatsApp vira bagunça’" />
+
+        <label>Observações (opcional)</label>
+        <textarea id="obs" placeholder="Anote contexto: concorrência, sazonalidade, histórico com agência, etc."></textarea>
+
+        <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
+
+        <h2>3) Perguntas por nicho (aparece conforme escolha)</h2>
+
+        <!-- CLINICAS -->
+        <div id="box_clinicas" class="hide">
+          <div class="row">
+            <div>
+              <label>Procedimento / serviço âncora</label>
+              <input id="clin_ancora" placeholder="Ex.: Harmonização / Implante / Depilação a laser" />
+            </div>
+            <div>
+              <label>No-show (faltas) hoje</label>
+              <select id="clin_noshow">
+                <option value="">Selecione…</option>
+                <option value="baixo">Baixo (≤10%)</option>
+                <option value="medio">Médio (10–25%)</option>
+                <option value="alto">Alto (25%+)</option>
+                <option value="nao_sei">Não sei</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Existe esteira de follow-up/reativação?</label>
+              <select id="clin_esteira">
+                <option value="">Selecione…</option>
+                <option value="sim">Sim</option>
+                <option value="parcial">Parcial</option>
+                <option value="nao">Não</option>
+              </select>
+            </div>
+            <div>
+              <label>Recepção/consultor treinado com script?</label>
+              <select id="clin_script">
+                <option value="">Selecione…</option>
+                <option value="sim">Sim</option>
+                <option value="parcial">Parcial</option>
+                <option value="nao">Não</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- MODA -->
+        <div id="box_moda" class="hide">
+          <div class="row">
+            <div>
+              <label>Tipo de operação</label>
+              <select id="moda_tipo">
+                <option value="">Selecione…</option>
+                <option value="fisica">Loja física</option>
+                <option value="ecom">E-commerce</option>
+                <option value="ambos">Física + E-commerce</option>
+              </select>
+            </div>
+            <div>
+              <label>Reposição x Lançamento</label>
+              <select id="moda_modelo">
+                <option value="">Selecione…</option>
+                <option value="reposicao">Reposição (recorrência forte)</option>
+                <option value="lancamento">Lançamento (drop/coleções)</option>
+                <option value="misto">Misto</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>WhatsApp vende bem?</label>
+              <select id="moda_whats">
+                <option value="">Selecione…</option>
+                <option value="sim">Sim</option>
+                <option value="parcial">Parcial</option>
+                <option value="nao">Não</option>
+              </select>
+            </div>
+            <div>
+              <label>Rotina de conteúdo (Reels/Stories)</label>
+              <select id="moda_rotina">
+                <option value="">Selecione…</option>
+                <option value="forte">Forte (consistente)</option>
+                <option value="media">Média</option>
+                <option value="fraca">Fraca</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- LOCAL -->
+        <div id="box_local" class="hide">
+          <div class="row">
+            <div>
+              <label>Google Meu Negócio / Avaliações</label>
+              <select id="loc_google">
+                <option value="">Selecione…</option>
+                <option value="forte">Forte (muitas avaliações boas)</option>
+                <option value="medio">Médio</option>
+                <option value="fraco">Fraco / não usa</option>
+              </select>
+            </div>
+            <div>
+              <label>Diferencial claro (em 1 frase)</label>
+              <input id="loc_dif" placeholder="Ex.: ‘atendimento em 30min + garantia + preço justo’" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Oferta de entrada (porta de entrada)</label>
+              <select id="loc_oferta">
+                <option value="">Selecione…</option>
+                <option value="sim">Sim</option>
+                <option value="parcial">Parcial</option>
+                <option value="nao">Não</option>
+              </select>
+            </div>
+            <div>
+              <label>Recorrência/retorno planejado</label>
+              <select id="loc_rec">
+                <option value="">Selecione…</option>
+                <option value="sim">Sim</option>
+                <option value="parcial">Parcial</option>
+                <option value="nao">Não</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="btns">
+          <button class="primary" id="btn_calc">Calcular Score</button>
+          <button id="btn_copy">Copiar Resumo</button>
+          <button id="btn_txt">Baixar TXT</button>
+          <button id="btn_json">Baixar JSON</button>
+          <button id="btn_csv">Baixar CSV</button>
+          <button class="bad" id="btn_reset">Limpar</button>
+        </div>
+
+        <p class="hint">
+          ✅ Dica: Use isso como “triagem” antes de marcar reunião. Se o lead travar nos números ou na verba/timing,
+          você já nutre com tarefa em vez de lotar sua agenda.
+        </p>
+      </div>
+
+      <!-- DIREITA: RESULTADOS -->
+      <div class="card">
+        <h2>Resultado</h2>
+
+        <div class="kpi">
+          <div class="box">
+            <div class="t">Score (0–100)</div>
+            <div class="v" id="out_score">—</div>
+          </div>
+          <div class="box">
+            <div class="t">Decisão</div>
+            <div class="v" id="out_decisao">—</div>
+          </div>
+        </div>
+
+        <div style="margin-top:10px">
+          <span class="badge b-warn" id="out_badge">Aguardando cálculo</span>
+        </div>
+
+        <label style="margin-top:14px">Resumo (copiar e colar no WhatsApp / CRM)</label>
+        <textarea id="out_resumo" class="mono" placeholder="Clique em Calcular para gerar o resumo…"></textarea>
+
+        <label style="margin-top:12px">Mensagem sugerida (próximo passo)</label>
+        <textarea id="out_msg" class="mono" placeholder="Mensagem automática conforme decisão…"></textarea>
+
+        <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
+
+        <h2>Regras de decisão</h2>
+        <div class="chips">
+          <div class="chip"><b>80+</b> → Marcar reunião + proposta</div>
+          <div class="chip"><b>60–79</b> → Marcar diagnóstico (call curta)</div>
+          <div class="chip"><b>&lt;60</b> → Nutrir/Desqualificar (tarefa)</div>
+        </div>
+
+        <p class="hint">
+          O score é um guia. Se faltar base (sem verba, sem decisor, sem estrutura de atendimento),
+          a decisão pode cair mesmo com dor alta.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    function showNicheBoxes(){
+      const n = $("nicho").value;
+      $("box_clinicas").classList.toggle("hide", n !== "clinicas");
+      $("box_moda").classList.toggle("hide", n !== "moda");
+      $("box_local").classList.toggle("hide", n !== "local");
+    }
+    $("nicho").addEventListener("change", showNicheBoxes);
+
+    function toNum(v){
+      const n = Number(v);
+      return isNaN(n) ? 0 : n;
+    }
+
+    function safe(v){ return (v ?? "").toString().trim(); }
+
+    function calcConversionRate(leads, conv){
+      if(leads <= 0) return null;
+      return (conv / leads) * 100;
+    }
+
+    // Score model (0–100) baseado no que você já usa:
+    // Timing (20), Autoridade (15), Números (15), Verba mídia (15), Estrutura (10), Dor clara (10), Compromisso (15)
+    function calcScore(data){
+      let score = 0;
+
+      // Timing (0–20)
+      if(data.timing === "agora") score += 20;
+      else if(data.timing === "30") score += 12;
+      else if(data.timing === "depois") score += 4;
+
+      // Autoridade (0–15)
+      if(data.autoridade === "sim") score += 15;
+      else if(data.autoridade === "junto") score += 9;
+      else if(data.autoridade === "nao") score += 3;
+
+      // Números (0–15): se informou leads e conversões
+      const hasLeads = data.leads30 > 0;
+      const hasConv = data.conv30 > 0;
+      if(hasLeads && hasConv) score += 15;
+      else if(hasLeads || hasConv) score += 8;
+      else score += 2;
+
+      // Verba mídia (0–15): heurística simples
+      // (Você pode ajustar depois por nicho/realidade)
+      if(data.midia >= 3000) score += 15;
+      else if(data.midia >= 1500) score += 12;
+      else if(data.midia >= 800) score += 8;
+      else if(data.midia > 0) score += 4;
+      else score += 1;
+
+      // Estrutura (0–10)
+      if(data.estrutura === "boa") score += 10;
+      else if(data.estrutura === "media") score += 6;
+      else if(data.estrutura === "fraca") score += 2;
+
+      // Dor clara (0–10)
+      if(data.dor.length >= 10) score += 10;
+      else if(data.dor.length > 0) score += 6;
+      else score += 2;
+
+      // Compromisso (0–15)
+      if(data.compromisso === "alto") score += 15;
+      else if(data.compromisso === "medio") score += 9;
+      else if(data.compromisso === "baixo") score += 2;
+
+      // Penalidades éticas (se faltar base crítica)
+      // Sem autoridade + timing depois + sem mídia tende a ser lead fraco
+      if(data.autoridade === "nao" && data.timing === "depois") score -= 8;
+      if(data.midia === 0 && data.compromisso === "baixo") score -= 6;
+      if(data.resposta === "24+" && data.estrutura === "fraca") score -= 5;
+
+      // Clamp
+      score = Math.max(0, Math.min(100, Math.round(score)));
+      return score;
+    }
+
+    function decide(score, data){
+      // Regras base
+      let decisao = "";
+      let tipo = "";
+
+      if(score >= 80) { decisao = "MARCAR REUNIÃO (Lead quente)"; tipo = "ok"; }
+      else if(score >= 60) { decisao = "MARCAR DIAGNÓSTICO (Call curta)"; tipo = "warn"; }
+      else { decisao = "NUTRIR / DESQUALIFICAR (Sem base)"; tipo = "bad"; }
+
+      // Ajuste por “travas” (mesmo com score ok)
+      const travaSemDecisor = (data.autoridade === "nao");
+      const travaSemTiming = (data.timing === "depois");
+      const travaSemMidia = (data.midia === 0);
+
+      if(score >= 80 && (travaSemDecisor || travaSemTiming)){
+        decisao = "DIAGNÓSTICO + ALINHAR DECISOR/TIMING";
+        tipo = "warn";
+      }
+      if(score >= 60 && travaSemMidia){
+        decisao = "DIAGNÓSTICO / SETUP (sem escalar mídia agora)";
+        tipo = "warn";
+      }
+
+      return { decisao, tipo };
+    }
+
+    function planRecommendation(data){
+      // Recomendação simples (não é promessa, é encaixe de escopo)
+      // Você pode ajustar depois para seu playbook.
+      if(data.compromisso === "alto" && data.midia >= 1500 && data.crm !== "crm"){
+        return "Plano recomendado: Scale 360 (tráfego + CRM + scripts + rotina de conversão).";
+      }
+      if(data.midia >= 3000 && data.compromisso !== "baixo"){
+        return "Plano recomendado: Authority & LTV (ecossistema completo + automações + retenção).";
+      }
+      return "Plano recomendado: Start Performance (tráfego + direção + base de rotina).";
+    }
+
+    function buildResumo(data, score, decisao){
+      const convRate = calcConversionRate(data.leads30, data.conv30);
+      const convText = (convRate === null) ? "—" : (convRate.toFixed(1) + "%");
+
+      const gargaloProvavel = (() => {
+        // heurística simples para “gargalo #1”
+        if(data.resposta === "24+" || data.resposta === "2-24") return "Conversão (tempo de resposta / follow-up)";
+        if(data.crm === "nenhum" || data.crm === "whats") return "Conversão (sem processo/CRM/pipeline)";
+        if(data.canal === "nao_sei") return "Aquisição (demanda irregular / falta de estratégia)";
+        if(data.compromisso === "baixo") return "Gestão/Operação (sem rotina de execução)";
+        return "Ajuste fino (aquisição + conversão com KPIs)";
+      })();
+
+      const linhas = [
+        `📌 *Qualificação DigitalDM*`,
+        `• Lead: ${data.lead_nome || "—"} | Negócio: ${data.lead_empresa || "—"} | Nicho: ${data.nichoLabel}`,
+        `• Cidade: ${data.lead_cidade || "—"} | Insta/Site: ${data.lead_insta || "—"} | Whats: ${data.lead_whats || "—"}`,
+        ``,
+        `🎯 Objetivo: ${data.objetivoLabel}`,
+        `📥 Canal atual: ${data.canalLabel}`,
+        `⏱️ Tempo de resposta: ${data.respostaLabel}`,
+        `🧩 Processo/CRM: ${data.crmLabel}`,
+        ``,
+        `📊 Números (30 dias): Leads = ${data.leads30 || "—"} | Vendas/Agend. = ${data.conv30 || "—"} | Conv. aprox = ${convText}`,
+        `💰 Ticket médio: R$ ${data.ticket || "—"} | Mídia mensal: R$ ${data.midia || "—"}`,
+        ``,
+        `🔎 Dor principal: ${data.dor || "—"}`,
+        `🚧 Gargalo provável #1: ${gargaloProvavel}`,
+        ``,
+        `✅ Score: ${score}/100`,
+        `🧭 Decisão: ${decisao}`,
+        `${planRecommendation(data)}`,
+      ];
+
+      // Extra por nicho
+      if(data.nicho === "clinicas"){
+        linhas.push(
+          ``,
+          `🏥 (Clínica) Âncora: ${data.clin_ancora || "—"} | No-show: ${data.clin_noshowLabel}`,
+          `📲 Esteira follow-up/reativação: ${data.clin_esteiraLabel} | Script na recepção: ${data.clin_scriptLabel}`
+        );
+      }
+      if(data.nicho === "moda"){
+        linhas.push(
+          ``,
+          `👗 (Moda) Operação: ${data.moda_tipoLabel} | Modelo: ${data.moda_modeloLabel}`,
+          `📲 Whats vende: ${data.moda_whatsLabel} | Rotina conteúdo: ${data.moda_rotinaLabel}`
+        );
+      }
+      if(data.nicho === "local"){
+        linhas.push(
+          ``,
+          `📍 (Local) Google/Avaliações: ${data.loc_googleLabel} | Oferta entrada: ${data.loc_ofertaLabel}`,
+          `🔁 Recorrência planejada: ${data.loc_recLabel} | Diferencial: ${data.loc_dif || "—"}`
+        );
+      }
+
+      if(data.obs){
+        linhas.push(``, `📝 Obs: ${data.obs}`);
+      }
+
+      return linhas.join("\n");
+    }
+
+    function nextStepMessage(score, decisao){
+      if(score >= 80 && decisao.includes("REUNIÃO")){
+        return [
+          "Perfeito. Pelo que você me passou, faz sentido total.",
+          "Vou te encaixar numa reunião de 30 min pra eu te entregar o diagnóstico com os 3 gargalos e o plano de 90 dias.",
+          "Qual melhor horário: (opção 1) ou (opção 2)?"
+        ].join("\n");
+      }
+      if(score >= 60){
+        return [
+          "Entendi. Dá pra te ajudar, mas antes eu preciso fechar 2 pontos no diagnóstico pra não te colocar num plano errado.",
+          "Vamos fazer uma call curta (20 min) só pra diagnóstico e direção.",
+          "Melhor horário: (opção 1) ou (opção 2)?"
+        ].join("\n");
+      }
+      return [
+        "Vou ser bem honesto: com o cenário de agora, não vale você investir no ecossistema completo porque faltam bases mínimas pra dar certo.",
+        "O que eu recomendo é: me mandar (1) leads 30 dias, (2) vendas/agendamentos 30 dias, (3) ticket médio, e (4) quem atende o WhatsApp.",
+        "Quando estiver com isso, me chama com a palavra 'PRIORIDADE' que eu reavalio e marco o próximo passo."
+      ].join("\n");
+    }
+
+    function getLabels(){
+      const maps = {
+        nicho: {
+          "": "—",
+          "clinicas": "Clínicas",
+          "moda": "Moda",
+          "local": "Negócios Locais"
+        },
+        objetivo: {
+          "": "—",
+          "leads": "Mais leads",
+          "conversao": "Mais vendas/agendamentos",
+          "previsibilidade": "Previsibilidade",
+          "retencao": "Retenção/LTV"
+        },
+        canal: {
+          "": "—",
+          "organico": "Orgânico",
+          "meta": "Meta Ads",
+          "google": "Google",
+          "misto": "Misto",
+          "nao_sei": "Irregular / Não sei"
+        },
+        resposta: {
+          "": "—",
+          "0-5": "0–5 min",
+          "5-30": "5–30 min",
+          "30-120": "30–120 min",
+          "2-24": "2–24h",
+          "24+": "24h+"
+        },
+        crm: {
+          "": "—",
+          "crm": "CRM + pipeline",
+          "planilha": "Planilha",
+          "whats": "Só WhatsApp",
+          "nenhum": "Nenhum / bagunçado"
+        },
+        estrutura: { "": "—", "boa":"Boa", "media":"Média", "fraca":"Fraca" },
+        compromisso: { "": "—", "alto":"Alto", "medio":"Médio", "baixo":"Baixo" },
+        clin_noshow: { "": "—", "baixo":"Baixo", "medio":"Médio", "alto":"Alto", "nao_sei":"Não sei" },
+        simParcialNao: { "": "—", "sim":"Sim", "parcial":"Parcial", "nao":"Não" },
+        moda_tipo: { "": "—", "fisica":"Loja física", "ecom":"E-commerce", "ambos":"Física + E-commerce" },
+        moda_modelo: { "": "—", "reposicao":"Reposição", "lancamento":"Lançamento", "misto":"Misto" },
+        moda_rotina: { "": "—", "forte":"Forte", "media":"Média", "fraca":"Fraca" },
+        loc_google: { "": "—", "forte":"Forte", "medio":"Médio", "fraco":"Fraco / não usa" },
+      };
+      return maps;
+    }
+
+    function collect(){
+      const L = getLabels();
+      const data = {
+        lead_nome: safe($("lead_nome").value),
+        lead_empresa: safe($("lead_empresa").value),
+        nicho: $("nicho").value,
+        nichoLabel: L.nicho[$("nicho").value] || "—",
+        lead_cidade: safe($("lead_cidade").value),
+        lead_whats: safe($("lead_whats").value),
+        lead_insta: safe($("lead_insta").value),
+
+        autoridade: $("autoridade").value,
+        timing: $("timing").value,
+
+        objetivo: $("objetivo").value,
+        objetivoLabel: L.objetivo[$("objetivo").value] || "—",
+        canal: $("canal").value,
+        canalLabel: L.canal[$("canal").value] || "—",
+        resposta: $("resposta").value,
+        respostaLabel: L.resposta[$("resposta").value] || "—",
+        crm: $("crm").value,
+        crmLabel: L.crm[$("crm").value] || "—",
+
+        leads30: toNum($("leads30").value),
+        conv30: toNum($("conv30").value),
+        ticket: toNum($("ticket").value),
+        midia: toNum($("midia").value),
+
+        estrutura: $("estrutura").value,
+        estruturaLabel: L.estrutura[$("estrutura").value] || "—",
+        compromisso: $("compromisso").value,
+        compromissoLabel: L.compromisso[$("compromisso").value] || "—",
+
+        dor: safe($("dor").value),
+        obs: safe($("obs").value),
+
+        // Clínicas
+        clin_ancora: safe($("clin_ancora").value),
+        clin_noshow: $("clin_noshow").value,
+        clin_noshowLabel: (L.clin_noshow[$("clin_noshow").value] || "—"),
+        clin_esteira: $("clin_esteira").value,
+        clin_esteiraLabel: (L.simParcialNao[$("clin_esteira").value] || "—"),
+        clin_script: $("clin_script").value,
+        clin_scriptLabel: (L.simParcialNao[$("clin_script").value] || "—"),
+
+        // Moda
+        moda_tipo: $("moda_tipo").value,
+        moda_tipoLabel: (L.moda_tipo[$("moda_tipo").value] || "—"),
+        moda_modelo: $("moda_modelo").value,
+        moda_modeloLabel: (L.moda_modelo[$("moda_modelo").value] || "—"),
+        moda_whats: $("moda_whats").value,
+        moda_whatsLabel: (L.simParcialNao[$("moda_whats").value] || "—"),
+        moda_rotina: $("moda_rotina").value,
+        moda_rotinaLabel: (L.moda_rotina[$("moda_rotina").value] || "—"),
+
+        // Local
+        loc_google: $("loc_google").value,
+        loc_googleLabel: (L.loc_google[$("loc_google").value] || "—"),
+        loc_dif: safe($("loc_dif").value),
+        loc_oferta: $("loc_oferta").value,
+        loc_ofertaLabel: (L.simParcialNao[$("loc_oferta").value] || "—"),
+        loc_rec: $("loc_rec").value,
+        loc_recLabel: (L.simParcialNao[$("loc_rec").value] || "—"),
+      };
+      return data;
+    }
+
+    function setBadge(tipo){
+      const badge = $("out_badge");
+      badge.className = "badge " + (tipo === "ok" ? "b-ok" : tipo === "warn" ? "b-warn" : "b-bad");
+      badge.textContent = (tipo === "ok") ? "Lead quente" : (tipo === "warn") ? "Lead morno" : "Lead fraco";
+    }
+
+    function calculate(){
+      const data = collect();
+      const score = calcScore(data);
+      const dec = decide(score, data);
+
+      $("out_score").textContent = score.toString();
+      $("out_decisao").textContent = dec.decisao;
+      setBadge(dec.tipo);
+
+      const resumo = buildResumo(data, score, dec.decisao);
+      $("out_resumo").value = resumo;
+      $("out_msg").value = nextStepMessage(score, dec.decisao);
+
+      // Guardar para export
+      window.__ddm = { data, score, decisao: dec.decisao, resumo };
+    }
+
+    function download(filename, content, mime){
+      const blob = new Blob([content], { type: mime || "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function exportTXT(){
+      if(!window.__ddm) calculate();
+      const { resumo } = window.__ddm;
+      const name = (window.__ddm.data.lead_empresa || "lead").replace(/[^\w\-]+/g,"_");
+      download(`DigitalDM_Qualificacao_${name}.txt`, resumo, "text/plain");
+    }
+
+    function exportJSON(){
+      if(!window.__ddm) calculate();
+      const payload = window.__ddm;
+      const name = (payload.data.lead_empresa || "lead").replace(/[^\w\-]+/g,"_");
+      download(`DigitalDM_Qualificacao_${name}.json`, JSON.stringify(payload, null, 2), "application/json");
+    }
+
+    function exportCSV(){
+      if(!window.__ddm) calculate();
+      const p = window.__ddm;
+      const d = p.data;
+
+      const fields = [
+        ["lead_nome", d.lead_nome],
+        ["lead_empresa", d.lead_empresa],
+        ["nicho", d.nichoLabel],
+        ["cidade", d.lead_cidade],
+        ["whats", d.lead_whats],
+        ["insta_site", d.lead_insta],
+        ["objetivo", d.objetivoLabel],
+        ["canal", d.canalLabel],
+        ["tempo_resposta", d.respostaLabel],
+        ["crm", d.crmLabel],
+        ["leads_30d", d.leads30],
+        ["vendas_agend_30d", d.conv30],
+        ["ticket", d.ticket],
+        ["midia", d.midia],
+        ["estrutura", d.estruturaLabel],
+        ["compromisso", d.compromissoLabel],
+        ["dor", d.dor],
+        ["score", p.score],
+        ["decisao", p.decisao]
+      ];
+
+      const csv = [
+        "campo,valor",
+        ...fields.map(([k,v]) => `${JSON.stringify(k)},${JSON.stringify((v ?? "").toString())}`)
+      ].join("\n");
+
+      const name = (d.lead_empresa || "lead").replace(/[^\w\-]+/g,"_");
+      download(`DigitalDM_Qualificacao_${name}.csv`, csv, "text/csv;charset=utf-8");
+    }
+
+    async function copyResumo(){
+      if(!window.__ddm) calculate();
+      try{
+        await navigator.clipboard.writeText($("out_resumo").value);
+        const old = $("btn_copy").textContent;
+        $("btn_copy").textContent = "Copiado ✅";
+        setTimeout(()=> $("btn_copy").textContent = old, 1200);
+      }catch(e){
+        alert("Não consegui copiar automaticamente. Selecione o texto do resumo e copie manualmente.");
+      }
+    }
+
+    function resetAll(){
+      if(!confirm("Limpar tudo?")) return;
+      document.querySelectorAll("input, select, textarea").forEach(el=>{
+        if(el.id.startsWith("out_")) return;
+        if(el.tagName === "SELECT") el.value = "";
+        else el.value = "";
+      });
+      window.__ddm = null;
+      $("out_score").textContent = "—";
+      $("out_decisao").textContent = "—";
+      $("out_resumo").value = "";
+      $("out_msg").value = "";
+      $("out_badge").className = "badge b-warn";
+      $("out_badge").textContent = "Aguardando cálculo";
+      showNicheBoxes();
+    }
+
+    $("btn_calc").addEventListener("click", calculate);
+    $("btn_copy").addEventListener("click", copyResumo);
+    $("btn_txt").addEventListener("click", exportTXT);
+    $("btn_json").addEventListener("click", exportJSON);
+    $("btn_csv").addEventListener("click", exportCSV);
+    $("btn_reset").addEventListener("click", resetAll);
+
+    // init
+    showNicheBoxes();
+  </script>
+</body>
+</html>
